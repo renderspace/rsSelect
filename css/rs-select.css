@@ -1,0 +1,57 @@
+.dropdown{
+	display: block;
+	width: auto;
+	height: auto;
+	min-width: 300px;
+	max-width: 100%;
+
+	position: relative;
+}
+
+.dropdown.disabled{
+	color: #555555;
+	background: #888888;
+}
+
+.dd-btn{
+	display: inline-block;
+	width: 100%;
+	border: 1px solid #333333;
+	background: #888888;
+	line-height: 40px;
+	font-size: 20px;
+	white-space: nowrap;
+}
+
+.dd-options{
+	display: block;
+	position: absolute;
+	width: auto;
+	min-width: 100%;
+	height: auto;
+
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 10;
+}
+
+.dd-item{
+	line-height: 26px;
+	border: 1px solid red;
+	border-top: none;
+}
+
+.dd-item.disabled{
+	background: #888888;
+	color: #555555;
+}
+
+.dd-item.selected{
+	background: red;
+	color: #ffffff;
+}
+
+.dd-arrow:after{
+	content: "⇣";
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]>  <html class="ie7"><![endif]-->
+<!--[if IE 8 ]>  <html class="ie8"><![endif]-->
+<!--[if IE 9 ]>  <html class="ie9"><![endif]-->
+<!--[if lt IE 9]><script src="js/html5.js"></script><![endif]-->
+<html lang="si">
+<head>
+	<meta charset="utf-8">
+	<title>RS Select</title>
+	<meta name="description" content="">
+	<meta name="author" content="Renderspace">
+	<meta name="keywords" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/rs-select.css">
+
+	<script src="js/jquery-3.1.0.min.js"></script>
+	<script src="js/rs-select.jquery.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.custom-select').rsSelect();
+		});
+	</script>
+</head>
+<body>
+	<table width="90%">
+		<tr>
+			<td colspan="2">
+				<a href="#" class="destroy">Destroy</a>
+				<a href="#" class="reinit">Reinit</a>
+				<a href="#" class="init">Init</a>
+			</td>
+		</tr>
+		<tr>
+			<td width="50%">
+				
+				<h2>Default</h2>
+				<select class="custom-select">
+					<option>Option 1</option>
+					<option disabled>Option 2</option>
+					<option>Option 3</option>
+					<option>Option 4</option>
+					<option>Option 5</option>
+					<option>Option 6</option>
+					<option>Option 7</option>
+				</select>
+
+			</td>
+			<td width="50%">
+				
+				<h2>Multiple</h2>
+				<select class="custom-select" multiple>
+					<option>Option 1</option>
+					<option selected>Option 2</option>
+					<option>Option 3</option>
+					<option selected>Option 4</option>
+					<option>Option 5</option>
+					<option>Option 6</option>
+					<option disabled>Option 7</option>
+					<option>Option 8</option>
+				</select>
+
+			</td>
+		</tr>
+	</table>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.destroy').on('click', function(){
+				$('select.custom-select').rsSelect('destroy');
+				
+			});
+			$('.reinit').on('click', function(){
+				$('select.custom-select').rsSelect('reinit');
+				
+			});
+			$('.init').on('click', function(){
+				$('select.custom-select').rsSelect();
+				
+			});
+		});
+	</script>
+</body>
+</html>
