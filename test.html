@@ -49,7 +49,7 @@
 			</td>
 			<td width="50%">
 				
-				<h2>Multiple</h2>
+				<h2 class="return-false">Multiple</h2>
 				<select class="custom-select" multiple>
 					<option>Option 1</option>
 					<option selected>Option 2</option>
@@ -78,7 +78,30 @@
 			$('.init').on('click', function(){
 				$('select.custom-select').rsSelect();
 				
+
 			});
+
+			$('select.custom-select:last').on('rsSelect.beforeChange', function(evt, dropdown, select){
+				console.log('beforeChange');
+			});
+			$('select.custom-select:last').on('rsSelect.afterChange', function(evt, dropdown, select){
+				console.log('afterChange');
+			});
+			$('select.custom-select:last').on('rsSelect.beforeOpen', function(evt, dropdown, select){
+				console.log('beforeOpen');
+			});
+			$('select.custom-select:last').on('rsSelect.afterOpen', function(evt, dropdown, select){
+				console.log('afterOpen');
+			});
+			$('select.custom-select:last').on('rsSelect.beforeClose', function(evt, dropdown, select){
+				console.log('beforeClose');
+			});
+			$('select.custom-select:last').on('rsSelect.afterClose', function(evt, dropdown, select){
+				console.log('afterClose');
+			});
+
+			// test close
+			$('.return-false').on('click', function(evt){return false;})
 		});
 	</script>
 </body>
