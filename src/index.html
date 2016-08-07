@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>RS Select</title>
+	<meta name="description" content="">
+	<meta name="author" content="Renderspace">
+	<meta name="keywords" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="css/rs-select.css">
+
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="js/rs-select.jquery.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.custom-select').rsSelect();
+		});
+	</script>
+</head>
+<body>
+	<table width="90%">
+		<tr>
+			<td colspan="2">
+				<a href="#" class="destroy">Destroy</a>
+				<a href="#" class="reinit">Reinit</a>
+				<a href="#" class="init">Init</a>
+			</td>
+		</tr>
+		<tr>
+			<td width="50%">
+
+				<h2>Default</h2>
+				<select class="custom-select">
+					<option>Option 1</option>
+					<option disabled>Option 2</option>
+					<option>Option 3</option>
+					<option>Option 4</option>
+					<option>Option 5</option>
+					<option>Option 6</option>
+					<option>Option 7</option>
+				</select>
+
+			</td>
+			<td width="50%">
+
+				<h2 class="return-false">Multiple</h2>
+				<select class="custom-select" multiple>
+					<option>Option 1</option>
+					<option selected>Option 2</option>
+					<option>Option 3</option>
+					<option selected>Option 4</option>
+					<option>Option 5</option>
+					<option>Option 6</option>
+					<option disabled>Option 7</option>
+					<option>Option 8</option>
+				</select>
+
+			</td>
+		</tr>
+	</table>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.destroy').on('click', function(){
+				$('select.custom-select').rsSelect('destroy');
+
+			});
+			$('.reinit').on('click', function(){
+				$('select.custom-select').rsSelect('reinit');
+
+			});
+			$('.init').on('click', function(){
+				$('select.custom-select').rsSelect();
+
+
+			});
+
+			$('select.custom-select:last').on('rsSelect.beforeChange', function(evt, dropdown, select){
+				console.log('beforeChange');
+			});
+			$('select.custom-select:last').on('rsSelect.afterChange', function(evt, dropdown, select){
+				console.log('afterChange');
+			});
+			$('select.custom-select:last').on('rsSelect.beforeOpen', function(evt, dropdown, select){
+				console.log('beforeOpen');
+			});
+			$('select.custom-select:last').on('rsSelect.afterOpen', function(evt, dropdown, select){
+				console.log('afterOpen');
+			});
+			$('select.custom-select:last').on('rsSelect.beforeClose', function(evt, dropdown, select){
+				console.log('beforeClose');
+			});
+			$('select.custom-select:last').on('rsSelect.afterClose', function(evt, dropdown, select){
+				console.log('afterClose');
+			});
+
+			// test close
+			$('.return-false').on('click', function(evt){return false;})
+		});
+	</script>
+</body>
+</html>
