@@ -49,7 +49,7 @@
 			</td>
 			<td width="50%">
 				
-				<h2>Multiple</h2>
+				<h2 class="return-false">Multiple</h2>
 				<select class="custom-select" multiple>
 					<option>Option 1</option>
 					<option selected>Option 2</option>
@@ -99,6 +99,9 @@
 			$('select.custom-select:last').on('rsSelect.afterClose', function(evt, dropdown, select){
 				console.log('afterClose');
 			});
+
+			// test close
+			$('.return-false').on('click', function(evt){return false;})
 		});
 	</script>
 </body>

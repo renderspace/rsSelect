@@ -241,6 +241,9 @@
 					else{
 						openList($list);
 					}
+
+					// evt.preventDefault();
+					return false;
 				});
 			}
 
@@ -264,14 +267,23 @@
 					// autoclose
 					if(settings.autoClose == true){
 						
-						$(document).on('click.rsSelect-autoclose', autoClose);
+						// $(document).on('click.rsSelect-autoclose', autoClose);
 
-						function autoClose(evt){
-							if ($(evt.target).closest($dropdown[0]).length === 0) {
-								console.log('test');
-								closeList($list);
-							}
-						}
+						// function autoClose(evt){
+						// 	console.log('test');
+						// 	if ($(evt.target).closest($dropdown[0]).length === 0) {
+						// 		closeList($list);
+						// 	}
+						// }
+
+						// var $overlay = $('<div>', {style: 'position: fixed; z-index: 999; width: 100%; height: 100%;', class: 'dd-overlay'}).on('click', function(){
+							
+						// 	closeList($list);
+
+						// 	$(this).remove();
+						// });
+
+						// $dropdown.append($overlay);
 					}
 
 					// afterOpen callback
@@ -291,11 +303,6 @@
 				var $dropdown = $list.closest('.' + settings.wrap.attrs.class);
 				var $select = $($dropdown[0].rsSelectSelect);
 				var easing = (typeof $.easing[settings.easing] != "undefined") ? settings.easing:false;
-
-				// auto close
-				if(settings.autoClose == true){
-					$(document).unbind('click.rsSelect-autoclose');
-				}
 				
 				// beforeClose cllback
 				if(typeof settings.beforeClose === "function" && settings.beforeClose($dropdown, $select) === false) return false;
@@ -305,6 +312,12 @@
 					if($select.triggerHandler("rsSelect.beforeClose", [$dropdown, $select]) === false) return false;
 				}
 
+				// off autoclose event
+				// if(settings.autoClose == true){
+				// 	$(document).off('click.rsSelect-autoclose');
+				// 	// $('*').off('click.rsSelect-autoclose');
+				// }
+				$(document).unbind('click.rsSelect-autoclose');
 				$list.stop(true, false).slideUp(settings.speed, easing, function(){
 					$dropdown.removeClass(settings.expandedClass);
 
