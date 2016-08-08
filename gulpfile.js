@@ -1,44 +1,55 @@
-'use strict'
-
-var gulp    = require('gulp')
-var config = require('./package.json').config
-var gulpLoadPlugins = require('gulp-load-plugins') // loads all gulp- prefixed modules
-var stylelint = require('stylelint')
+var gulp = require('gulp')
+var gulpLoadPlugins = require('gulp-load-plugins')
+var browserSyncLib = require('browser-sync')
+var pjson = require('./package.json')
+var wrench = require('wrench')
+var minimist = require('minimist')
 
 // Load all gulp plugins based on their names
 // EX: gulp-copy -> copy
-
 var plugins = gulpLoadPlugins()
 
-var runSequence = require('run-sequence')
+var config = pjson.config
+var args = minimist(process.argv.slice(2))
+var dirs = config.directories
+var taskTarget = args.production ? dirs.destination : dirs.temporary
 
-// browserSync
-var browserSync = require('browser-sync').create()
-gulp.task('browserSync', require('./gulp/browserSync')(gulp, plugins, browserSync, config))
+// Create a new browserSync instance
+var browserSync = browserSyncLib.create()
 
-// SASS
-gulp.task('sass', require('./gulp/sass')(gulp, plugins, browserSync, config))
-gulp.task('sass-stylelint', require('./gulp/sass-stylelint')(gulp, plugins, browserSync, config, stylelint))
-
-// JS
-gulp.task('scripts', require('./gulp/scripts')(gulp, plugins, browserSync, config))
-gulp.task('jshint', require('./gulp/jshint')(gulp, plugins, config))
-gulp.task('standard', require('./gulp/standard')(gulp, plugins, config))
-
-// other
-gulp.task('clean', require('./gulp/clean')(gulp, plugins, config))
-gulp.task('copy', require('./gulp/copy')(gulp, plugins, config))
-
-// watch
-
-gulp.task('watch', require('./gulp/watch')(gulp, plugins, browserSync, config))
-
-// DEFAULT TASK - DEVEL WITH WATCHERS
-
-gulp.task('default', ['browserSync','sass','sass-stylelint','scripts','jshint','standard', 'watch'])
-
-// DIST TASK - clean, to dist
-
-gulp.task('dist', function() {
-  runSequence(['clean'],'copy')
+// This will grab all js in the `gulp` directory
+// in order to load all gulp tasks
+wrench.readdirSyncRecursive('./gulp').filter(function (file) {
+  return (/\.(js)$/i).test(file)
+}).map(function (file) {
+  require('./gulp/' + file)(gulp, plugins, args, config, taskTarget, browserSync)
 })
+
+// Default task
+gulp.task('default', ['clean'], function () {
+  gulp.start('build')
+})
+
+// Build production-ready code
+gulp.task('build', [
+  'copy',
+  'images',
+  'svg',
+  'copyFromNodeModules',
+  'sass',
+  'scripts'
+// 'browserify'
+])
+
+// Server tasks with watch
+gulp.task('devel', [
+  'images',
+  'svg',
+  'copy',
+  'copyFromNodeModules',
+  'sass',
+  'scripts',
+  // 'browserify',
+  'browserSync',
+  'watch'
+])

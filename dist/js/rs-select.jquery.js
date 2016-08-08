@@ -33,19 +33,19 @@
 				var isDisabled = (typeof $select.attr('disabled') !== "undefined") ? true:false;
 
 				if(!isMultiple && $options.filter('[selected]').length < 1){
-					$options.filter(':first').prop('selected', true).attr('selected', '');	
+					$options.filter(':first').prop('selected', true).attr('selected', '');
 				}
-				
+
 				// insert dropdown
 				var $dropdown = insertDropdown($select, $options, isMultiple, isDisabled);
 
 				// save data/settings
 				$dropdown[0].rsSelectSettings = settings;
 				$dropdown[0].rsSelectSelect = $select[0];
-				
+
 				$select[0].rsSelectDropdown = $dropdown[0];
 				$select[0].rsSelectSettings = settings;
-				
+
 				// set events
 				var $items = $dropdown.find('.' + settings.list.attrs.class + ' .' + settings.item.attrs.class);
 				setItemEvents($items);
@@ -57,7 +57,7 @@
 			function insertDropdown($select, $options, isMultiple, isDisabled){
 				// create wrap
 				var $wrap = $(settings.wrap.element , settings.wrap.attrs);
-				
+
 				if(settings.wrap.copyClasses == true){
 					$wrap.addClass($select.attr('class'));
 				}
@@ -131,12 +131,12 @@
 				$selOptions.each(function(i){
 					var $option = $(this);
 
-					if(i > 0){ 
+					if(i > 0){
 						toggleText += settings.toggle.separator;
 					}
 					toggleText += $option.text();
 				});
-				
+
 				return settings.toggle.content(toggleText, $toggle);
 			}
 
@@ -175,10 +175,10 @@
 					var isDisabled = ($dropdown.hasClass(settings.disabledClass) || $item.hasClass(settings.disabledClass)) ? true:false;
 					var isMultiple = ($dropdown.hasClass(settings.multipleClass)) ? true:false;
 					var isSelected = ($item.hasClass(settings.selectedClass)) ? true:false;
-					
+
 					// return if disabled item/dropdown
 					if(isDisabled) return false;
-					
+
 					// before change callback
 					if(typeof settings.beforeChange == "function" && settings.beforeChange($dropdown, $select) === false) return false;
 
@@ -206,7 +206,7 @@
 
 					// update select
 					updateSelectOptions($items, $options);
-					
+
 					// update dropdown toggle
 					$toggle.html(generateToggleContent($options, $toggle));
 
@@ -234,7 +234,7 @@
 					var $toggle = $(this);
 					var $dropdown = $toggle.closest('.' + settings.wrap.attrs.class);
 					var $list = $dropdown.find('.' + settings.list.attrs.class);
-					
+
 					if($list.is(':visible')){
 						closeList($list);
 					}
@@ -251,7 +251,7 @@
 				var $dropdown = $list.closest('.' + settings.wrap.attrs.class);
 				var $select = $($dropdown[0].rsSelectSelect);
 				var easing = (typeof $.easing[settings.easing] != "undefined") ? settings.easing:false;
-				
+
 				// beforeOpen cllback
 				if(typeof settings.beforeOpen === "function" && settings.beforeOpen($dropdown, $select) === false) return false;
 
@@ -266,24 +266,19 @@
 				$list.stop(true, false).slideDown(settings.speed, easing, function(){
 					// autoclose
 					if(settings.autoClose == true){
-						
-						// $(document).on('click.rsSelect-autoclose', autoClose);
 
-						// function autoClose(evt){
-						// 	console.log('test');
-						// 	if ($(evt.target).closest($dropdown[0]).length === 0) {
-						// 		closeList($list);
-						// 	}
-						// }
-
-						// var $overlay = $('<div>', {style: 'position: fixed; z-index: 999; width: 100%; height: 100%;', class: 'dd-overlay'}).on('click', function(){
+						// autoclose
+						if(settings.autoClose == true){
 							
-						// 	closeList($list);
+							$(document).on('click.rsSelect-autoclose', autoClose);
 
-						// 	$(this).remove();
-						// });
-
-						// $dropdown.append($overlay);
+							function autoClose(evt){
+								if ($(evt.target).closest($dropdown[0]).length === 0) {
+									console.log('test');
+									closeList($list);
+								}
+							}
+						}
 					}
 
 					// afterOpen callback
@@ -303,7 +298,7 @@
 				var $dropdown = $list.closest('.' + settings.wrap.attrs.class);
 				var $select = $($dropdown[0].rsSelectSelect);
 				var easing = (typeof $.easing[settings.easing] != "undefined") ? settings.easing:false;
-				
+
 				// beforeClose cllback
 				if(typeof settings.beforeClose === "function" && settings.beforeClose($dropdown, $select) === false) return false;
 
@@ -313,11 +308,10 @@
 				}
 
 				// off autoclose event
-				// if(settings.autoClose == true){
-				// 	$(document).off('click.rsSelect-autoclose');
-				// 	// $('*').off('click.rsSelect-autoclose');
-				// }
-				$(document).unbind('click.rsSelect-autoclose');
+				if(settings.autoClose == true){
+					$(document).unbind('click.rsSelect-autoclose');
+				}
+				
 				$list.stop(true, false).slideUp(settings.speed, easing, function(){
 					$dropdown.removeClass(settings.expandedClass);
 
@@ -335,11 +329,11 @@
 
 
 		},
-		
+
         destroy: function(){
         	return this.each(function() {
 				var $select = $(this);
-				
+
 				if(!$select.is('select')) return;
 
 				if(typeof $select[0].rsSelectDropdown != "undefined"){
@@ -354,7 +348,7 @@
         reinit: function(){
         	return this.each(function() {
 				var $select = $(this);
-				
+
 				if(!$select.is('select')) return;
 
 				if(typeof $select[0].rsSelectSettings != "undefined"){
@@ -405,7 +399,7 @@
 				if(!toggleText){
 					toggleText = '&nbsp;';
 				}
-				return '<span class="dd-current">' + toggleText + '</span><span class="dd-arrow"></span>'; 
+				return '<span class="dd-current">' + toggleText + '</span><span class="dd-arrow"></span>';
 			},
 			separator: ', '
 		},
@@ -418,7 +412,7 @@
 				if(!itemText){
 					itemText = '&nbsp;';
 				}
-				return '<span class="dd-item-text">' + itemText + '</span>'; 
+				return '<span class="dd-item-text">' + itemText + '</span>';
 			},
 			copyClasses: true
 		},
