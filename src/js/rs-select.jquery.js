@@ -243,7 +243,7 @@
 					}
 
 					// evt.preventDefault();
-					return false;
+					// return false;
 				});
 			}
 
@@ -254,6 +254,8 @@
 
 				// beforeOpen cllback
 				if(typeof settings.beforeOpen === "function" && settings.beforeOpen($dropdown, $select) === false) return false;
+
+
 
 				// beforeOpen trigger
 				if(typeof $select.triggerHandler === "function"){
@@ -274,7 +276,6 @@
 
 							function autoClose(evt){
 								if ($(evt.target).closest($dropdown[0]).length === 0) {
-									console.log('test');
 									closeList($list);
 								}
 							}
