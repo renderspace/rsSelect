@@ -249,17 +249,20 @@
 				var $select = $($dropdown[0].rsSelectSelect);
 				var easing = (typeof $.easing[settings.easing] != "undefined") ? settings.easing:false;
 
+				// set dirwection class
+				if(settings.upClass){
+					var $window = $(window);
+					var windowHeight = $window.height();
+					var scrollTop = $window.scrollTop();
+				}
+
 				// beforeOpen cllback
 				if(typeof settings.beforeOpen === "function" && settings.beforeOpen($dropdown, $select) === false) return false;
-
-
 
 				// beforeOpen trigger
 				if(typeof $select.triggerHandler === "function"){
 					if($select.triggerHandler("rsSelect.beforeOpen", [$dropdown, $select]) === false) return false;
 				}
-
-
 
 				$dropdown.addClass(settings.expandedClass);
 				$list.stop(true, false).slideDown(settings.speed, easing, function(){
@@ -364,7 +367,7 @@
 		speed: 400,
 		easing: 'easeInOutQuad',
 		autoClose: true,
-
+		upClass: '.dropdown-up',
     	wrap: {
 			element: '<div>',
 			attrs: {
