@@ -241,9 +241,6 @@
 					else{
 						openList($list);
 					}
-
-					// evt.preventDefault();
-					// return false;
 				});
 			}
 
@@ -392,7 +389,7 @@
 			wrapInner: '<div class="test-list-wrap"></div>'
 		},
 		toggle: {
-			element: '<a>',
+			element: '<div>',
 			attrs: {
 				class: 'dd-btn'
 			},
