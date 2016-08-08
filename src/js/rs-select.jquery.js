@@ -21,7 +21,9 @@ $.fn.rsSelect.methods = {
       var $select = $(this).hide()
 
       // check type
-      if (!$select.is('select')) return
+      if (!$select.is('select')) {
+        return
+      }
 
       // clear existing data/element
       if (typeof $select[0].rsSelectDropdown !== 'undefined') {
@@ -143,7 +145,7 @@ $.fn.rsSelect.methods = {
     }
 
     function updateSelectOptions ($items, $options) {
-      $items.each(function (i) {
+      $items.each(function () {
         var $item = $(this)
         var itemIndex = $items.index($item)
 
@@ -156,7 +158,7 @@ $.fn.rsSelect.methods = {
     }
 
     function setItemEvents ($items) {
-      $items.on('click.rsSelect-item', function (evt) {
+      $items.on('click.rsSelect-item', function () {
         var $item = $(this)
         var $dropdown = $item.closest('.' + settings.wrap.attrs.class)
         var $toggle = $dropdown.find('.' + settings.toggle.attrs.class)
@@ -228,7 +230,7 @@ $.fn.rsSelect.methods = {
     }
 
     function setToggleEvents ($toggle) {
-      $toggle.on('click.rsSelect-toggle', function (evt) {
+      $toggle.on('click.rsSelect-toggle', function () {
         var $toggle = $(this)
         var $dropdown = $toggle.closest('.' + settings.wrap.attrs.class)
         var $list = $dropdown.find('.' + settings.list.attrs.class)
@@ -250,7 +252,19 @@ $.fn.rsSelect.methods = {
       if (settings.upClass) {
         var $window = $(window)
         var windowHeight = $window.height()
-        var scrollTop = $window.scrollTop()
+        var windowScroll = $window.scrollTop()
+        var windowBottom = windowHeight + windowScroll
+
+        $dropdown.removeClass(settings.upClass)
+        $list.show()
+        var listHeight = $list.outerHeight()
+        var listOffset = $list.offset().top
+        var listBottom = listHeight + listOffset
+        $list.hide()
+
+        if (listBottom > windowBottom) {
+          $dropdown.addClass(settings.upClass)
+        }
       }
 
       // beforeOpen cllback
@@ -296,11 +310,15 @@ $.fn.rsSelect.methods = {
       var easing = (typeof $.easing[settings.easing] !== 'undefined') ? settings.easing : false
 
       // beforeClose cllback
-      if (typeof settings.beforeClose === 'function' && settings.beforeClose($dropdown, $select) === false) return false
+      if (typeof settings.beforeClose === 'function' && settings.beforeClose($dropdown, $select) === false) {
+        return false
+      }
 
       // beforeClose trigger
       if (typeof $select.triggerHandler === 'function') {
-        if ($select.triggerHandler('rsSelect.beforeClose', [$dropdown, $select]) === false) return false
+        if ($select.triggerHandler('rsSelect.beforeClose', [$dropdown, $select]) === false) {
+          return false
+        }
       }
 
       // off autoclose event
@@ -326,7 +344,9 @@ $.fn.rsSelect.methods = {
     return this.each(function () {
       var $select = $(this)
 
-      if (!$select.is('select')) return
+      if (!$select.is('select')) {
+        return
+      }
 
       if (typeof $select[0].rsSelectDropdown !== 'undefined') {
         $($select[0].rsSelectDropdown).remove()
@@ -341,7 +361,9 @@ $.fn.rsSelect.methods = {
     return this.each(function () {
       var $select = $(this)
 
-      if (!$select.is('select')) return
+      if (!$select.is('select')) {
+        return
+      }
 
       if (typeof $select[0].rsSelectSettings !== 'undefined') {
         return $select.rsSelect($select[0].rsSelectSettings)
@@ -358,7 +380,7 @@ $.fn.rsSelect.defaults = {
   speed: 400,
   easing: 'easeInOutQuad',
   autoClose: true,
-  upClass: '.dropdown-up',
+  upClass: 'dropdown-up',
   wrap: {
     element: '<div>',
     attrs: {

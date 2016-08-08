@@ -42,6 +42,11 @@
   z-index: 10;
 }
 
+.dropdown-up .dd-options {
+  top: auto;
+  bottom: 100%;
+}
+
 .dd-item {
   line-height: 26px;
   border: 1px solid red;
