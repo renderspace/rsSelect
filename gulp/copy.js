@@ -2,17 +2,33 @@
 
 var path = require('path')
 
-module.exports = function (gulp, plugins, args, config, taskTarget, browserSync) {
-  var src = [ path.join('src', '**/*'),
-    '!' + path.join('src', '{**/\_*,**/\_*/**}'),
-    '!' + path.join('src', '**/*.nunjucks'),
-    '!' + path.join('src', '**/*.md')
-  ]
-  var dest = path.join(taskTarget)
-
+module.exports = function (gulp, plugins, config) {
   gulp.task('copy', function () {
-    return gulp.src(src)
-      .pipe(plugins.changed(dest))
-      .pipe(gulp.dest(dest))
-  })
+
+   var bases = {
+     app: 'src/',
+     dist: config.dist,
+   }
+
+   var paths = {
+    html: ['*.html'],
+    scripts: ['js/**/*.js'],
+    styles: ['css/*.css'],
+   }
+
+   gulp.src(paths.html, {cwd: bases.app})
+     .pipe(gulp.dest(bases.dist))
+
+   // Copy STYLESHEETS
+
+   gulp.src(paths.styles, {cwd: bases.app})
+     .pipe(gulp.dest(bases.dist + 'css'))
+
+   // Copy JAVASCRIPT & Uglify
+
+   gulp.src(paths.scripts, {cwd: bases.app})
+     .pipe(plugins.uglify())
+     .pipe(gulp.dest(bases.dist + 'js'))
+
+ })
 }

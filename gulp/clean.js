@@ -1,11 +1,8 @@
 'use strict'
 
-var path = require('path')
-var del = require('del')
-
-module.exports = function (gulp, plugins, args, config, taskTarget, browserSync) {
-  gulp.task('clean', del.bind(null, [
-    path.join('tmp')
-  // path.join(dirs.destination)
-  ]))
+module.exports = function(gulp, plugins, config) {
+  return function() {
+    var del = require('del')
+    return del(config.dist)
+  }
 }
