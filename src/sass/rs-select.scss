@@ -7,7 +7,7 @@
 */
 
 
-.dropdown {
+.rs-select {
   display: block;
   width: auto;
   height: auto;
@@ -16,12 +16,12 @@
   position: relative;
 }
 
-.dropdown.disabled {
+.rs-select.is-disabled {
   color: #555555;
   background: #888888;
 }
 
-.dd-btn {
+.rs-select-button {
   display: inline-block;
   width: 100%;
   border: 1px solid #333333;
@@ -31,7 +31,7 @@
   white-space: nowrap;
 }
 
-.dd-options {
+.rs-select-options {
   display: block;
   position: absolute;
   width: auto;
@@ -40,30 +40,33 @@
   top: 100%;
   left: 0;
   z-index: 10;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.dropdown-up .dd-options {
+.direction-up .rs-select-options {
   top: auto;
   bottom: 100%;
 }
 
-.dd-item {
+.rs-select-option {
   line-height: 26px;
   border: 1px solid red;
   border-top: none;
 }
 
-.dd-item.disabled {
+.rs-select-option.is-disabled {
   background: #888888;
   color: #555555;
 }
 
-.dd-item.selected {
+.rs-select-option.is-selected {
   background: red;
   color: #ffffff;
 }
 
-.dd-arrow {
+.rs-select-indicator {
   &::after {
     content: "⇣";
   }

@@ -372,18 +372,18 @@ $.fn.rsSelect.methods = {
 }
 
 $.fn.rsSelect.defaults = {
-  disabledClass: 'disabled',
-  selectedClass: 'selected',
-  expandedClass: 'expanded',
-  multipleClass: 'multiple',
+  disabledClass: 'is-disabled',
+  selectedClass: 'is-selected',
+  expandedClass: 'is-expanded',
+  multipleClass: 'is-multiple',
   speed: 400,
   easing: '',
   autoClose: true,
-  upClass: 'dropdown-up',
+  upClass: 'direction-up',
   wrap: {
     element: '<div>',
     attrs: {
-      class: 'dropdown'
+      class: 'rs-select'
     },
     copyClasses: true,
     wrapInner: ''
@@ -391,40 +391,40 @@ $.fn.rsSelect.defaults = {
   header: {
     element: '<div>',
     attrs: {
-      class: 'dd-select'
-    },
-    wrapInner: ''
-  },
-  list: {
-    element: '<div>',
-    attrs: {
-      class: 'dd-options'
+      class: 'rs-select-header'
     },
     wrapInner: ''
   },
   toggle: {
     element: '<div>',
     attrs: {
-      class: 'dd-btn'
+      class: 'rs-select-button'
     },
     content: function (toggleText) {
       if (!toggleText) {
         toggleText = '&nbsp'
       }
-      return '<span class="dd-current">' + toggleText + '</span><span class="dd-arrow"></span>'
+      return '<span class="is-current">' + toggleText + '</span><span class="rs-select-indicator"></span>'
     },
     separator: ', '
   },
-  item: {
-    element: '<div>',
+  list: {
+    element: '<ul>',
     attrs: {
-      class: 'dd-item'
+      class: 'rs-select-options'
+    },
+    wrapInner: ''
+  },
+  item: {
+    element: '<li>',
+    attrs: {
+      class: 'rs-select-option'
     },
     content: function (itemText) {
       if (!itemText) {
         itemText = '&nbsp'
       }
-      return '<span class="dd-item-text">' + itemText + '</span>'
+      return '<span class="rs-select-text">' + itemText + '</span>'
     },
     copyClasses: true
   }
