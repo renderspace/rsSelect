@@ -177,13 +177,13 @@ $.fn.rsSelect.methods = {
         }
 
         // before change callback
-        if (typeof settings.beforeChange === 'function' && settings.beforeChange($dropdown, $select) === false) {
+        if (typeof settings.beforeChange === 'function' && settings.beforeChange($dropdown, $select, $item) === false) {
           return false
         }
 
         // before change trigger
         if (typeof $select.triggerHandler === 'function') {
-          if ($select.triggerHandler('rsSelect.beforeChange', [$dropdown, $select]) === false) {
+          if ($select.triggerHandler('rsSelect.beforeChange', [$dropdown, $select, $item]) === false) {
             return false
           }
         }
@@ -217,12 +217,12 @@ $.fn.rsSelect.methods = {
 
         // afterChange callback
         if (typeof settings.afterChange === 'function') {
-          settings.afterChange($dropdown, $select, isChanged)
+          settings.afterChange($dropdown, $select, $item, isChanged)
         }
 
         // afterChange trigger
         if (typeof $select.triggerHandler === 'function') {
-          $select.triggerHandler('rsSelect.afterChange', [$dropdown, $select, isChanged])
+          $select.triggerHandler('rsSelect.afterChange', [$dropdown, $select, $item, isChanged])
         }
 
         return false
@@ -248,6 +248,17 @@ $.fn.rsSelect.methods = {
       var $select = $($dropdown[0].rsSelectSelect)
       var easing = (typeof $.easing[settings.easing] !== 'undefined') ? settings.easing : false
 
+      // beforeOpen cllback
+      if (typeof settings.beforeOpen === 'function' && settings.beforeOpen($dropdown, $select) === false) {
+        return false
+      }
+
+      // beforeOpen trigger
+      if (typeof $select.triggerHandler === 'function') {
+        if ($select.triggerHandler('rsSelect.beforeOpen', [$dropdown, $select]) === false) {
+          return false
+        }
+      }
       // set dirwection class
       if (settings.upClass) {
         var $window = $(window)
@@ -266,19 +277,7 @@ $.fn.rsSelect.methods = {
           $dropdown.addClass(settings.upClass)
         }
       }
-
-      // beforeOpen cllback
-      if (typeof settings.beforeOpen === 'function' && settings.beforeOpen($dropdown, $select) === false) {
-        return false
-      }
-
-      // beforeOpen trigger
-      if (typeof $select.triggerHandler === 'function') {
-        if ($select.triggerHandler('rsSelect.beforeOpen', [$dropdown, $select]) === false) {
-          return false
-        }
-      }
-
+      // open
       $dropdown.addClass(settings.expandedClass)
       $list.stop(true, false).slideDown(settings.speed, easing, function () {
         // autoclose
@@ -378,38 +377,37 @@ $.fn.rsSelect.defaults = {
   expandedClass: 'expanded',
   multipleClass: 'multiple',
   speed: 400,
-  easing: 'easeInOutQuad',
+  easing: '',
   autoClose: true,
   upClass: 'dropdown-up',
   wrap: {
     element: '<div>',
     attrs: {
-      class: 'dropdown',
-      title: 'Select option/s'
+      class: 'dropdown'
     },
     copyClasses: true,
-    wrapInner: '<div class="test-wrap-wrap"></div>'
+    wrapInner: ''
   },
   header: {
     element: '<div>',
     attrs: {
       class: 'dd-select'
     },
-    wrapInner: '<div class="test-header-wrap"></div>'
+    wrapInner: ''
   },
   list: {
     element: '<div>',
     attrs: {
       class: 'dd-options'
     },
-    wrapInner: '<div class="test-list-wrap"></div>'
+    wrapInner: ''
   },
   toggle: {
     element: '<div>',
     attrs: {
       class: 'dd-btn'
     },
-    content: function (toggleText, toggle) {
+    content: function (toggleText) {
       if (!toggleText) {
         toggleText = '&nbsp'
       }
@@ -422,20 +420,12 @@ $.fn.rsSelect.defaults = {
     attrs: {
       class: 'dd-item'
     },
-    content: function (itemText, item) {
+    content: function (itemText) {
       if (!itemText) {
         itemText = '&nbsp'
       }
       return '<span class="dd-item-text">' + itemText + '</span>'
     },
     copyClasses: true
-  },
-
-  // callbacks
-  beforeChange: function (dropdown, select) { },
-  afterChange: function (dropdown, select, isChanged) { },
-  beforeOpen: function (dropdown, select) { },
-  beforeClose: function (dropdown, select) { },
-  afterOpen: function (dropdown, select) { },
-  afterClose: function (dropdown, select) { }
+  }
 }
