@@ -348,3 +348,67 @@ $('select').filter(':last').on('rsSelect.afterChange', function(evt, dropdown, s
 	}
 });
 ```
+
+
+## Default optins list
+
+```
+$.fn.rsSelect.defaults = {
+  disabledClass: 'disabled',
+  selectedClass: 'selected',
+  expandedClass: 'expanded',
+  multipleClass: 'multiple',
+  speed: 400,
+  easing: '',
+  autoClose: true,
+  upClass: 'dropdown-up',
+  wrap: {
+    element: '<div>',
+    attrs: {
+      class: 'dropdown'
+    },
+    copyClasses: true,
+    wrapInner: ''
+  },
+  header: {
+    element: '<div>',
+    attrs: {
+      class: 'dd-select'
+    },
+    wrapInner: ''
+  },
+  list: {
+    element: '<div>',
+    attrs: {
+      class: 'dd-options'
+    },
+    wrapInner: ''
+  },
+  toggle: {
+    element: '<div>',
+    attrs: {
+      class: 'dd-btn'
+    },
+    content: function (toggleText) {
+      if (!toggleText) {
+        toggleText = '&nbsp'
+      }
+      return '<span class="dd-current">' + toggleText + '</span><span class="dd-arrow"></span>'
+    },
+    separator: ', '
+  },
+  item: {
+    element: '<div>',
+    attrs: {
+      class: 'dd-item'
+    },
+    content: function (itemText) {
+      if (!itemText) {
+        itemText = '&nbsp'
+      }
+      return '<span class="dd-item-text">' + itemText + '</span>'
+    },
+    copyClasses: true
+  }
+}
+```
