@@ -349,6 +349,22 @@ $('select').filter(':last').on('rsSelect.afterChange', function(evt, dropdown, s
 });
 ```
 
+## Methods
+
+### Destroy
+
+```
+$('select').rsSelect('destroy');
+```
+
+### Reinit
+
+Svaka izmjena u DOM treba se praviti na select i 
+pozvati method reinit za generisanje novog dropdown html-a.
+
+```
+$('select').rsSelect('reinit');
+```
 
 ## Default settings
 
