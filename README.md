@@ -120,36 +120,6 @@ dodatne wrap elemente oko dropdown contenta.
 default: ''
 ```
 
-### header (object)
-
-object koji sadrzi postavke za dropdown header element
-	
-#### element (string)
-
-tip dropdown header html elementa
-```
-default: '<div>'
-```
-
-#### attrs (object)
-
-object sa html attributes koje ce biti dodani na dropdown header element
-
-##### class (string)
-
-class koji ce biti dodan na dropdown header element
-```
-default: 'dd-select'
-```
-
-#### wrapInner
-
-ova opcija koristi jQuery wrapInner funkciju da po potrebi doda
-dodatne wrap elemente oko dropdown header contenta.
-```
-default: ''
-```
-
 ### list (object)
 
 object koji sadrzi postavke za dropdown items list element
@@ -270,6 +240,11 @@ default: true
 
 ## Callbacks
 
+### afterInit
+```
+function (dropdown, select) { }
+```
+
 ### beforeChange
 ```
 function (dropdown, select, item) { }
@@ -327,6 +302,17 @@ $('select').rsSelect({
 
 U pluginu imaju triggeri za sljedece evente:
 
+### rsSelect.afterInit[dropdown, select]
+
+Napomena: afterInit event se mora podesiti prije pozivanja init funkcije.
+```
+$('select').on('rsSelect.afterInit', function(evt, dropdown, select){
+  console.log('afterInit');
+});
+$('.custom-select').rsSelect();
+```
+
+
 ### rsSelect.beforeChange[dropdown, select, item]
 
 ### rsSelect.afterChange[dropdown, select, item, isChanged]
@@ -349,6 +335,7 @@ $('select').filter(':last').on('rsSelect.afterChange', function(evt, dropdown, s
 });
 ```
 
+
 ## Methods
 
 ### Destroy
@@ -370,59 +357,52 @@ $('select').rsSelect('reinit');
 
 ```
 $.fn.rsSelect.defaults = {
-  disabledClass: 'disabled',
-  selectedClass: 'selected',
-  expandedClass: 'expanded',
-  multipleClass: 'multiple',
+  disabledClass: 'is-disabled',
+  selectedClass: 'is-selected',
+  expandedClass: 'is-expanded',
+  multipleClass: 'is-multiple',
   speed: 400,
   easing: '',
   autoClose: true,
-  upClass: 'dropdown-up',
+  upClass: 'direction-up',
   wrap: {
     element: '<div>',
     attrs: {
-      class: 'dropdown'
+      class: 'rs-select'
     },
     copyClasses: true,
-    wrapInner: ''
-  },
-  header: {
-    element: '<div>',
-    attrs: {
-      class: 'dd-select'
-    },
-    wrapInner: ''
-  },
-  list: {
-    element: '<div>',
-    attrs: {
-      class: 'dd-options'
-    },
     wrapInner: ''
   },
   toggle: {
     element: '<div>',
     attrs: {
-      class: 'dd-btn'
+      class: 'rs-select-button'
     },
     content: function (toggleText) {
       if (!toggleText) {
         toggleText = '&nbsp'
       }
-      return '<span class="dd-current">' + toggleText + '</span><span class="dd-arrow"></span>'
+      return toggleText
     },
     separator: ', '
   },
-  item: {
-    element: '<div>',
+  list: {
+    element: '<ul>',
     attrs: {
-      class: 'dd-item'
+      class: 'rs-select-options'
+    },
+    wrapInner: ''
+  },
+  item: {
+    element: '<li>',
+    attrs: {
+      class: 'rs-select-option'
     },
     content: function (itemText) {
       if (!itemText) {
         itemText = '&nbsp'
       }
-      return '<span class="dd-item-text">' + itemText + '</span>'
+      return itemText
     },
     copyClasses: true
   }

@@ -53,8 +53,17 @@ $.fn.rsSelect.methods = {
       // set events
       var $items = $dropdown.find('.' + settings.list.attrs.class + ' .' + settings.item.attrs.class)
       setItemEvents($items)
-      var $toggle = $dropdown.find('.' + settings.header.attrs.class + ' .' + settings.toggle.attrs.class)
+      var $toggle = $dropdown.find(' .' + settings.toggle.attrs.class)
       setToggleEvents($toggle)
+
+      // afterChange callback
+      if (typeof settings.afterInit === 'function') {
+        settings.afterInit($dropdown, $select)
+      }
+      // afterChange trigger
+      if (typeof $select.triggerHandler === 'function') {
+        $select.triggerHandler('rsSelect.afterInit', [$dropdown, $select])
+      }
     })
 
     function insertDropdown ($select, $options, isMultiple, isDisabled) {
@@ -75,14 +84,10 @@ $.fn.rsSelect.methods = {
         $wrap.removeClass(settings.multipleClass)
       }
 
-      // create header
-      var $header = $(settings.header.element, settings.header.attrs)
-      $wrap.append($header)
-
-      // create header toggle
+      // create toggle
       var $toggle = $(settings.toggle.element, settings.toggle.attrs)
       $toggle.html(generateToggleContent($options, $toggle))
-      $header.append($toggle)
+      $wrap.append($toggle)
 
       // create list/items
       var $list = $(settings.list.element, settings.list.attrs).hide()
@@ -113,7 +118,6 @@ $.fn.rsSelect.methods = {
       $wrap.append($list)
 
       // wrap inner
-      $header.wrapInner(settings.header.wrapInner)
       $list.wrapInner(settings.list.wrapInner)
       $wrap.wrapInner(settings.wrap.wrapInner)
 
@@ -388,13 +392,6 @@ $.fn.rsSelect.defaults = {
     copyClasses: true,
     wrapInner: ''
   },
-  header: {
-    element: '<div>',
-    attrs: {
-      class: 'rs-select-header'
-    },
-    wrapInner: ''
-  },
   toggle: {
     element: '<div>',
     attrs: {
@@ -404,7 +401,7 @@ $.fn.rsSelect.defaults = {
       if (!toggleText) {
         toggleText = '&nbsp'
       }
-      return '<span class="is-current">' + toggleText + '</span><span class="rs-select-indicator"></span>'
+      return toggleText
     },
     separator: ', '
   },
@@ -424,7 +421,7 @@ $.fn.rsSelect.defaults = {
       if (!itemText) {
         itemText = '&nbsp'
       }
-      return '<span class="rs-select-text">' + itemText + '</span>'
+      return itemText
     },
     copyClasses: true
   }
