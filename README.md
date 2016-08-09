@@ -350,7 +350,7 @@ $('select').filter(':last').on('rsSelect.afterChange', function(evt, dropdown, s
 ```
 
 
-## Default optins list
+## Default settings
 
 ```
 $.fn.rsSelect.defaults = {
