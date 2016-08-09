@@ -6,30 +6,63 @@
 |
 */
 
+// RS SELECT WRAPPER
+
+$rs-select-disabled-color: #dbdbdb;
+$rs-select-disabled-background: #eee;
 
 .rs-select {
+
   display: block;
   width: auto;
   height: auto;
-  min-width: 300px;
-  max-width: 100%;
   position: relative;
+
+  // disabled state
+
+  &.is-disabled {
+    color: $rs-select-disabled-color;
+    background: $rs-select-disabled-background;
+  }
+
+  font-family: sans-serif;
+
 }
 
-.rs-select.is-disabled {
-  color: #555555;
-  background: #888888;
-}
+
+// RS SELECT BUTTON
+
+$rs-select-button-background: #f2f2f2;
+$rs-select-button-border-color: #ddd;
 
 .rs-select-button {
-  display: inline-block;
-  width: 100%;
-  border: 1px solid #333333;
-  background: #888888;
+  cursor: pointer;
+  border: 1px solid $rs-select-button-border-color;
+  background: $rs-select-button-background;
   line-height: 40px;
   font-size: 20px;
   white-space: nowrap;
 }
+
+.rs-select-indicator {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  background: grey;
+  text-align: center;
+
+  &::after {
+    content: '❯';
+    font-size: 14px;
+  }
+}
+
+// RS SELECT OPTIONS
+
+$rs-select-options-background: #f2f2f2;
+$rs-select-options-border-color: #ddd;
 
 .rs-select-options {
   display: block;
@@ -43,31 +76,39 @@
   margin: 0;
   padding: 0;
   list-style: none;
+
+  // going up
+
+  .direction-up & {
+    top: auto;
+    bottom: 100%;
+  }
 }
 
-.direction-up .rs-select-options {
-  top: auto;
-  bottom: 100%;
-}
+// RS SELECT OPTION
+
+$rs-select-option-border-color: #ddd;
+
 
 .rs-select-option {
+
+  cursor: pointer;
   line-height: 26px;
-  border: 1px solid red;
+  border: 1px solid $rs-select-option-border-color;
   border-top: none;
-}
 
-.rs-select-option.is-disabled {
-  background: #888888;
-  color: #555555;
-}
+  // selected
 
-.rs-select-option.is-selected {
-  background: red;
-  color: #ffffff;
-}
+  &.is-selected {
+    background: #2199e8;
+    color: #ffffff;
+  }
 
-.rs-select-indicator {
-  &::after {
-    content: "⇣";
+  // disabled
+
+  &.is-disabled {
+    cursor: default;
+    background: $rs-select-disabled-background;
+    color: $rs-select-disabled-color;
   }
 }
