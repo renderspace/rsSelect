@@ -6,6 +6,9 @@
 |
 */
 
+$rs-select-radius: 4px;
+$rs-select-padding-x: 20px;
+
 // RS SELECT WRAPPER
 
 $rs-select-disabled-color: #dbdbdb;
@@ -17,6 +20,13 @@ $rs-select-disabled-background: #eee;
   width: auto;
   height: auto;
   position: relative;
+  box-sizing: border-box;
+
+  font-family: sans-serif;
+
+  > * {
+    box-sizing: border-box;
+  }
 
   // disabled state
 
@@ -24,39 +34,59 @@ $rs-select-disabled-background: #eee;
     color: $rs-select-disabled-color;
     background: $rs-select-disabled-background;
   }
-
-  font-family: sans-serif;
-
 }
 
 
 // RS SELECT BUTTON
 
+$rs-select-button-height: 40px;
 $rs-select-button-background: #f2f2f2;
 $rs-select-button-border-color: #ddd;
 
 .rs-select-button {
+
   cursor: pointer;
+  height: $rs-select-button-height;
+  line-height: $rs-select-button-height;
   border: 1px solid $rs-select-button-border-color;
   background: $rs-select-button-background;
-  line-height: 40px;
-  font-size: 20px;
   white-space: nowrap;
+  position: relative;
+  padding: 0 $rs-select-padding-x;
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  &::before {
+    width: 40px;
+    height: 40px;
+  //  background: grey;
+  }
+
+  &::after {
+    color: #2199e8;
+    content: '❯';
+    font-size: 14px;
+    right: 15px;
+    transform: rotate(90deg);
+    //transition: transform 400ms ease-out;
+  }
+
+  .is-expanded & {
+    &::after {
+      transform: rotate(-90deg);
+    }
+  }
 }
 
 .rs-select-indicator {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 40px;
-  height: 40px;
-  background: grey;
-  text-align: center;
 
-  &::after {
-    content: '❯';
-    font-size: 14px;
-  }
 }
 
 // RS SELECT OPTIONS
@@ -88,7 +118,7 @@ $rs-select-options-border-color: #ddd;
 // RS SELECT OPTION
 
 $rs-select-option-border-color: #ddd;
-
+$rs-select-option-padding-y: 5px;
 
 .rs-select-option {
 
@@ -96,6 +126,14 @@ $rs-select-option-border-color: #ddd;
   line-height: 26px;
   border: 1px solid $rs-select-option-border-color;
   border-top: none;
+  padding: $rs-select-option-padding-y $rs-select-padding-x;
+  transition: background 400ms linear;
+
+  // hover
+
+  &:hover {
+    background: $rs-select-option-border-color;
+  }
 
   // selected
 
