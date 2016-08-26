@@ -4,7 +4,7 @@ Thanks for considering contributing to rsSelect!
 
 ## Opening issues
 
-If you find a bug, please feel free to [open an issue](https://github.com/kennethormandy/default/issues).
+If you find a bug, please feel free to [open an issue](https://github.com/renderspace/rsSelect/issues).
 
 If you taking the time to mention a problem, even a seemingly minor one, it is greatly appreciated, and a totally valid contribution to this project. Thank you!
 
@@ -12,47 +12,35 @@ If you taking the time to mention a problem, even a seemingly minor one, it is g
 
 We love pull requests. Heres a quick guide:
 
-1. [Fork this repository](https://github.com/kennethormandy/default/fork) and then clone it locally:
+1. [Fork this repository](https://github.com/renderspace/rsSelect/fork) and then clone it locally:
 
-  ```bash
+```bash
     git clone https://github.com/kennethormandy/default
-      ```
+```
 
-      2. Create a topic branch for your changes:
+2. Create a topic branch for your changes:
 
-        ```bash
+```bash
 	  git checkout -b fix-for-that-thing
-	    ```
-	    3. Commit a failing test for the bug:
+```
 
-	      ```bash
-	        git commit -am "Adds a failing test to demonstrate that thing"
-		  ```
+3. Commit a fix that makes the test pass:
 
-		  4. Commit a fix that makes the test pass:
+```bash
+  git commit -am "Adds a fix for that thing!"
+```
 
-		    ```bash
-		      git commit -am "Adds a fix for that thing!"
-		        ```
+4. If everything looks good, push to your fork:
 
-			5. Run the tests:
+```bash
+  git push origin fix-for-that-thing
+```
 
-			  ```bash
-			    npm test
-			      ```
+5. [Submit a pull request.](https://help.github.com/articles/creating-a-pull-request)
 
-			      6. If everything looks good, push to your fork:
+8. Enjoy being the wonderful person you are
 
-			        ```bash
-				  git push origin fix-for-that-thing
-				    ```
 
-				    7. [Submit a pull request.](https://help.github.com/articles/creating-a-pull-request)
+## Adding new features
 
-				    8. Enjoy being the wonderful person you are
-
-				      After youve opened your pull request, [you should email me](mailto:hello@kennethormandy.com) your mailing address so I can mail you a personal thank you note. Seriously!
-
-				      ## Adding new features
-
-				      Thinking of adding a new feature? Cool! [Open an issue](https://github.com/kennethormandy/default/issues) and lets design it together.
+Thinking of adding a new feature? Cool! [Open an issue](https://github.com/renderspace/rsSelect/issues) and lets design it together.
