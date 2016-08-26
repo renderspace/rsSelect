@@ -5,7 +5,7 @@ Contribute & Develop
 
 We've set up a separate document for our [contribution guidelines](https://github.com/renderspace/rsSelect/blob/master/CONTRIBUTING.md).
 
-#What to use rsSelect for and when to use it
+What to use rsSelect for and when to use it
 ---------
 
 We could have named it 'Yet Another Custom select jQuery plugin'
