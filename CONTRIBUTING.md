@@ -4,7 +4,7 @@ Thanks for considering contributing to rsSelect!
 
 ## Opening issues
 
-If you find a bug, please feel free to [open an issue](https://github.com/kennethormandy/default/issues).
+If you find a bug, please feel free to [open an issue](https://github.com/renderspace/rsSelect/issues).
 
 If you taking the time to mention a problem, even a seemingly minor one, it is greatly appreciated, and a totally valid contribution to this project. Thank you!
 
@@ -12,7 +12,7 @@ If you taking the time to mention a problem, even a seemingly minor one, it is g
 
 We love pull requests. Heres a quick guide:
 
-1. [Fork this repository](https://github.com/kennethormandy/default/fork) and then clone it locally:
+1. [Fork this repository](https://github.com/renderspace/rsSelect/fork) and then clone it locally:
 
 ```bash
     git clone https://github.com/kennethormandy/default
