@@ -56,11 +56,11 @@ $.fn.rsSelect.methods = {
       var $toggle = $dropdown.find(' .' + settings.toggle.attrs.class)
       setToggleEvents($toggle)
 
-      // afterChange callback
+      // afterInit callback
       if (typeof settings.afterInit === 'function') {
         settings.afterInit($dropdown, $select)
       }
-      // afterChange trigger
+      // afterInit trigger
       if (typeof $select.triggerHandler === 'function') {
         $select.triggerHandler('rsSelect.afterInit', [$dropdown, $select])
       }
