@@ -1,18 +1,28 @@
 # rsSelect
 
-## Koristenje plugina
+Contribute & Develop
+--------------------
+
+We've set up a separate document for our [contribution guidelines](https://github.com/renderspace/rsSelect/blob/master/CONTRIBUTING.md).
+
+What to use rsSelect for and when to use it
+---------
+
+We could have named it 'Yet Another Custom select jQuery plugin'
+
+## Usage
 
 ```
 $('select').rsSelect();
 ```
 
-## Podesavanje kroz options object
+## Options for particular instance
 
 ```
 $('select').rsSelect({optionKey:optionVal});
 ```
 
-## Override defaultnih postavki
+## Override default options
 
 ```
 $.fn.rsSelect.defaults.selectedClass = 'active';
@@ -25,157 +35,150 @@ $('select.form-select').rsSelect();
 
 ### disabledClass (string)
 
-klasa koja se doda na dropdown wrap ili dropdown item u zavisnosti od disabled attributa na select/option
+Sets CSS class name which is added to wrap (or dropdown item) when it is disabled.
 ```
 default: 'disabled'
 ```
 
 ### selectedClass (string)
 
-klasa koja se dodaje na selected dropdown items
+Sets CSS class name for selected dropdown item
 ```
 default: 'selected'
 ```
 
 ### expandedClass (string)
 
-klasa koja se dodaje na otvoreni dropdown
+Sets CSS class name for open (expanded) dropdown
 ```
 default: 'expanded'
 ```
 
 ### multipleClass (string)
 
-klasa koja se dodaje na dropdown koji je povezan sa select koji ima multiple attribut
+Sets CSS class name  for select with "multiple" attribute
 ```
 default: 'multiple'
 ```
 
 ### speed (int)
-brzina animacije za slideDown/slideUp
+
+Speed of animations for slideDown/slideUp [ms]
 ```
 default: 400
 ```
 
 ### easing (string)
 
-easing za dropdown slideDown/slideUp animaciju
+Easing for slideDown/slideUp animation
 ```
 default: ''
 ```
 
 ### autoClose (bool)
 
-automatsko zatvaranje dropdown liste na click izvan 
-aktivnog dropdown elementa.
+Set whether to close the dropdown if user clicks outside of active element
 ```
 default: true
 ```
 
 ### upClass (string/false)
 
-funkcionalnost za dodavanje posebnog class na dropdown koji unutar
-window nema prostora da se otvori prema dole.
-Funkcionalnost se moze disable ako se opcija podesi na false.
+Sets the name of CSS class which is added in situation where there is no space in current window to open the dropdown in down direction. If this property is set to false, nothing happens in this situation.
 ```
 default: 'dropdown-up'
 ```
 
 ### wrap (object)
 
-object koji sadrzi postavke za dropdown element
+Object holding settings and values of dropdown element:
 	
 #### element (string)
 	
-tip dropdown html elementa
+Type of dropdown html element
 ```
 default: '<div>'
 ```
 
 #### attrs (object)
 
-object sa html attributes koje ce biti dodani na dropdown wrap element
+Object with html attributes which are added to dropdown wrap element
 
 ##### class (string)
 
-class koji ce biti dodan na dropdown element		
+CSS class which is added to dropdown element		
 ```
 default: 'dropdown'
 ```
 
 #### copyClasses (bool)
 
-ako je ova opcija true sve classes sa select elementa, osim
-onih koje su zauzete u opcijama (selected, expanded, disabled),
-biti ce prekopirane na kreirani dropdown element.
+If this property is set to true, all classes from select element are copied to created dropdown. The only exception are options (selected, expanded, disabled),
 ```
 default: true
 ```
 
 #### wrapInner (string)
 
-ova opcija koristi jQuery wrapInner funkciju da po potrebi doda
-dodatne wrap elemente oko dropdown contenta.
+This featured uses jQuery wrapInner method in order to add wrap elements around dropdown
 ```
 default: ''
 ```
 
 ### list (object)
 
-object koji sadrzi postavke za dropdown items list element
+Object holding dropdown list elements
 	
 #### element (string)
 
-tip dropdown list html elementa
+Type of dropdown html list element
 ```
 default: '<div>'
 ```
 
 #### attrs (object)
 
-object sa html attributes koje ce biti dodani na dropdown items list element
+Object with html attributes which are added to dropdown list element
 
 ##### class (string)
 
-class koji ce biti dodan na dropdown items list element
+CSS class which is added to dropdown list item element
 ```
 default: 'dd-options'
 ```
 
 #### wrapInner
 
-ova opcija koristi jQuery wrapInner funkciju da po potrebi doda
-dodatne wrap elemente oko dropdown items list contenta.
+This featured uses jQuery wrapInner method in order to add wrap elements around dropdown items
 ```
 default: ''
 ```
 
 ### toggle (object)
 
-object koji sadrzi postavke za header toggle element
+Object holding dropdown header toggle settings
 	
 #### element (string)
 
-tip header toggle html elementa
+Type of header toggle html list element
 ```
 default: '<div>'
 ```
 
 #### attrs (object)
 
-object sa html attributes koje ce biti dodani na header toggle element
+Object with html attributes which are added to header toggle element
 
 ##### class (string)
 
-class koji ce biti dodan na header toggle element
+CSS class which is added to dropdown header toggle element
 ```
 default: 'dd-btn'
 ```
 
 #### content (function(toggleText, toggle))
 
-funkcija koja generise header toggle html strukturu zajedno 
-sa dinamicnim tekstom (selected item 1, selected item 2...)
+Method which generates header toggle html structure together with dynamic text (selected item 1, selected item 2...)
 ```
 default:
 
@@ -189,36 +192,36 @@ function (toggleText, toggle) {
 
 #### separator (string)
 
-separator za selected elements u toggleText
+separator for selected elements inside toggleText
 ```
 default: ', '
 ```
 
 ### item (object)
 
-object koji sadrzi postavke za list item element
+object holding settings for list item element
 	
 #### element (string)
 
-tip list item html elementa
+Type of list item html  element
+
 ```
 default: '<div>'
 ```
 #### attrs (object)
 
-object sa html attributes koje ce biti dodani na list item element
+Object with html attributes which are added to list item element
 
 ##### class (string)
 
-class koji ce biti dodan na list item element
+CSS class which is added to list item element
 ```
 default: 'dd-item'
 ```
 
 #### content (function(itemText, item))
 
-funkcija koja generise list item html strukturu zajedno sa 
-dinamicnim tekstom.
+Method which generates header list item html structure together with dynamic text
 ```
 default: 
 	
@@ -232,8 +235,7 @@ function (itemText, item) {
 
 #### copyClasses (bool)
 
-opcija kojom se omoguci kopiranje klasa sa select option na 
-upareni list item
+If this property is set to true, all classes from select option are copied to matching list item
 ```
 default: true
 ```
@@ -275,15 +277,9 @@ function (dropdown, select) { }
 function (dropdown, select) { }
 ```
 
-Callback funkcije se koriste tako sto se 
-dodaju kroz options object ili uradi override 
-defaultnih settings.
+beforeChange, beforeOpen, beforeClose methods: if exiting with return false, they will abort current change, open or close
 
-beforeChange, beforeOpen, beforeClose funkcije 
-ako se prekinu sa return false prekinuti ce
-trenutnu change, open ili close funkciju.
-
-####Koristenje:
+####Usage:
 
 ```
 $('select').rsSelect({
@@ -300,11 +296,11 @@ $('select').rsSelect({
 
 ## Events
 
-U pluginu imaju triggeri za sljedece evente:
+Plugin contains the following triggers for events:
 
 ### rsSelect.afterInit[dropdown, select]
 
-Napomena: afterInit event se mora podesiti prije pozivanja init funkcije.
+Notice: afterInit must be set up before calling init method.
 ```
 $('select').on('rsSelect.afterInit', function(evt, dropdown, select){
   console.log('afterInit');
@@ -325,7 +321,7 @@ $('.custom-select').rsSelect();
 
 ### rsSelect.afterClose[dropdown, select]
 
-####Koristenje:
+####Usage:
 
 ```
 $('select').filter(':last').on('rsSelect.afterChange', function(evt, dropdown, select, item, isChanged){
@@ -346,8 +342,7 @@ $('select').rsSelect('destroy');
 
 ### Reinit
 
-Svaka izmjena u DOM treba se praviti na select i 
-pozvati method reinit za generisanje novog dropdown html-a.
+Any DOM change needs reinitialization to generate new HTML.
 
 ```
 $('select').rsSelect('reinit');
