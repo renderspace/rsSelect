@@ -277,7 +277,7 @@ $.fn.rsSelect.methods = {
         var listBottom = listHeight + listOffset
         $list.hide()
 
-        if (listBottom > windowBottom) {
+        if (listBottom > windowBottom && listHeight < listOffset) {
           $dropdown.addClass(settings.upClass)
         }
       }
